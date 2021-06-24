@@ -49,7 +49,7 @@ public class login extends AppCompatActivity{
         btnsubmit1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(login.this,"You Logged In Successfully",Toast.LENGTH_LONG).show();;
+                Toast.makeText(login.this,"You Logged In Successfully!!",Toast.LENGTH_LONG).show();;
                 Intent i =new Intent(login.this,listdemo.class);
                 startActivity(i);
             }
