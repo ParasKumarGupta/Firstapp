@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".splash"
+    android:background="#d47e7e">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="First App"
+            android:textSize="20sp"
+            android:textColor="#DD2C00"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:gravity="center_horizontal" />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_baseline_camera_24"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:indeterminateTint="#FF0"
+            android:indeterminate="true"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="You will be directed to Sign Up Screen"
+            android:textStyle="bold"
+            android:layout_marginTop="60dp"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textColor="#DF1447"/>
+
+    </LinearLayout>
+
+</FrameLayout>
