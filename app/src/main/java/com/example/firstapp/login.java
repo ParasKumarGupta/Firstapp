@@ -15,11 +15,20 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.UserDataReader;
+import com.google.firebase.firestore.auth.User;
+
 public class login extends AppCompatActivity{
+
     TextView txtname1;
     EditText edtname1,edtpassword1;
     ImageButton btnsubmit1;
     Button btnsubmit2,Alarm,btnsubmit3;
+    FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +42,8 @@ public class login extends AppCompatActivity{
         txtname1= findViewById(R.id.txt_output1);
         btnsubmit3 =findViewById(R.id.btn_Submit3);
         Alarm=findViewById(R.id.btnalarm);
+        firestore=FirebaseFirestore.getInstance();
+
         Intent i = getIntent();
         String str = i.getStringExtra("name1");
         edtname1.setText(str);
@@ -49,8 +60,29 @@ public class login extends AppCompatActivity{
         btnsubmit1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(login.this,"You Logged In Successfully!!",Toast.LENGTH_LONG).show();;
-                Intent i =new Intent(login.this,listdemo.class);
+                firestore.collection("Register").document("Users").get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                UserDataR user1=documentSnapshot.toObject(UserDataR.class);
+                                String name=edtname1.getText().toString();
+                                String password=edtpassword1.getText().toString();
+                                if(name.equals(user1.getName()) && password.equals(user1.getPassword())){
+
+                                    Toast.makeText(getApplicationContext(),"You Logged In Successfully!!",Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(getApplicationContext(),"Not Logged In Successfully!!",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(login.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                Intent i =new Intent(getApplicationContext(),listdemo.class);
                 startActivity(i);
             }
         });
